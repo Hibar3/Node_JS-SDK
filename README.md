@@ -10,8 +10,10 @@ MOLPay Node_JS SDK
 6. MOLPay Development or Production ID.
 7. MOLPay General API.
 
-The packages can be easily installed on windows via npm install <packagename> 
-or you can just refer here https://www.npmjs.com/
+For ease of use, a demo version has been uploaded along with a sample html file and all required node modules in a zip file.
+If there is any trouble in using the uploaded package modules, the packages can be easily installed on windows via npm install <packagename> 
+or you can just refer here https://www.npmjs.com/ .
+
   
 ### Installation
 1. Download the app.js file
@@ -27,17 +29,17 @@ enviroment = "sandbox" #or "production"
 
 ### Payment Page integration
 Set these needed objects that will send the buyer infromation to MOLPay hosted payment page.
-```Python
+```Javascript
 #Value set are examples
-merchant_id = '' #Insert merchant id here
-vkey = '' #Insert Verify Key here
-amount = '61.01' #Insert amount here
-orderid = '601' #Insert order id here
+merchant_id = ''; //Insert merchant id here
+vkey = ''; //Insert Verify Key here
+amount = '61.01'; //Insert amount here
+orderid = 'OD601'; //Insert order id here, order ID shoud be random generated value by merchant developer side
 ```
 It is not needed to set all the Endpoint URLs. If not set,by default the Endpoint URLs would be taken from Merchant Portal's End Point settings.
 ```html
 <!-- Value set are examples -->
-<input type="hidden" name="returnurl" id="returnurl" value="http://127.0.0.1:5000/returnurl">
+<input type="hidden" name="returnurl" id="returnurl" value="http://127.0.0.1:8000/returnurl">
 ```
 ### Payment endpoint integration
 Set the values received from MOLPay's payment page.
@@ -59,7 +61,7 @@ channel = req.body.channel;
 ### IPN(Instant Payment Notification)
 Additional object must be set when using IPN
 
-treq = "1" #Value is always 1. Do not change
+treq = "1" //Value is always 1. Do not change
 
 
 #### Notification & Callback URL with IPN 
@@ -86,6 +88,24 @@ E.G return & notification & callback URL (all 3 url are using this structure)
     } else {
         // failure action. Write your script here .....
     }
+```
+
+### Additional Requirements for Seamless Integration
+If you are using the Seamless version, please ensure that you include this line of code in your html
+```html
+<script type="text/javascript" src="app.js"></script>
+```
+
+Also, remember to set the environment that you want to work in by including the script src below.
+
+For sandbox:
+```html
+<script src="https://sandbox.molpay.com/MOLPay/API/seamless/3.16/js/MOLPay_seamless.deco.js"></script>
+```
+
+For production:
+```html
+ <script src="https://www.onlinepayment.com.my/MOLPay/API/seamless/3.17/js/MOLPay_seamless.deco.js"></script>
 ```
 
 ### Requery
@@ -198,3 +218,4 @@ Changelog
 2. 2018-04-23 - v1.0.1 
 3. 2018-04-25 - v1.0.2 - Added Requery feature in separate file 
 4. 2018-05-3 - v1.0.3 - Fixed IPN request 
+5. 2018-05-7 - v1.0.4 - Uploaded demo version for both seamless and normal integration
